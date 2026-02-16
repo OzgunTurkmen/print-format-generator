@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
         );
 
         // Return ZIP as downloadable response
-        return new NextResponse(zipBuffer, {
+        return new NextResponse(new Uint8Array(zipBuffer), {
             headers: {
                 "Content-Type": "application/zip",
                 "Content-Disposition": 'attachment; filename="print-formats.zip"',
