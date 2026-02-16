@@ -1,5 +1,7 @@
 # Print Format Generator
 
+🔗 **Live Demo**: [print-format-generator.vercel.app](https://print-format-generator.vercel.app/)
+
 A web application for resizing images to print-ready formats with PDF and ZIP export.
 
 ## Features
