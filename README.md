@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Print Format Generator
 
-## Getting Started
+A web application for resizing images to print-ready formats with PDF and ZIP export.
 
-First, run the development server:
+## Features
+
+- **Multi-file upload** with drag & drop support
+- **Three print formats**: 2:3 (3125×4687), 3:4 (3515×4687), 4:5 (3750×4687)
+- **Two fit modes**: Contain (fit with background padding) and Cover (fill and crop)
+- **Customizable background color** for Contain mode
+- **Single ZIP download** containing:
+  - Per-format folders with resized images
+  - Per-format PDF documents
+  - Merged PDF when multiple formats are selected
+- Supports JPG, PNG, and JFIF images
+- All processing done server-side, in-memory (no disk writes)
+
+## Tech Stack
+
+- **Framework**: Next.js (App Router) + TypeScript
+- **Styling**: Tailwind CSS
+- **Image Processing**: Sharp
+- **PDF Generation**: pdf-lib
+- **ZIP Creation**: Archiver
+
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy to Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Push this repo to GitHub
+2. Go to [vercel.com](https://vercel.com) and import the repository
+3. Click **Deploy** — no extra configuration needed
 
-## Learn More
+Or use the Vercel CLI:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm i -g vercel
+vercel
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Upload images** – Drag and drop or click to select JPG/PNG/JFIF files
+2. **Select formats** – Check one or more print format checkboxes
+3. **Choose fit mode** – Contain (default) or Cover
+4. **Set background color** – For Contain mode padding (default: white)
+5. **Click "Start Processing"** – A ZIP file will download automatically
 
-## Deploy on Vercel
+## ZIP Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+print-formats.zip
+├── 2x3/              # Resized images (3125×4687)
+│   ├── photo1_2x3.jpg
+│   └── photo2_2x3.jpg
+├── 3x4/              # Resized images (3515×4687)
+├── 4x5/              # Resized images (3750×4687)
+├── 2x3.pdf           # PDF per format
+├── 3x4.pdf
+├── 4x5.pdf
+└── merged.pdf        # Combined (if >1 format)
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+MIT
